@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import ActiveOrders, CompletedOrders
 
-# Register your models here.
+
+admin.site.register(ActiveOrders)
+admin.site.register(CompletedOrders)
