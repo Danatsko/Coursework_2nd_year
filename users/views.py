@@ -1,7 +1,7 @@
 import datetime
 import json
 
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
@@ -335,6 +335,27 @@ def user_login(request):
     else:
         answer = {'Status': 'Fail',
                   'Massage': 'Authenticated.'
+                  }
+
+    return JsonResponse(answer)
+
+
+@csrf_protect
+def user_logaut(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            logout(request)
+
+            answer = {'Status': 'Success',
+                      'Massage': 'Logaut.'
+                      }
+        else:
+            answer = {'Status': 'Fail',
+                      'Massage': 'Wrong method.'
+                      }
+    else:
+        answer = {'Status': 'Fail',
+                  'Massage': 'Not authenticated.'
                   }
 
     return JsonResponse(answer)
