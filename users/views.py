@@ -148,73 +148,86 @@ def user_change_information(request):
                 parameters = dict(json.loads(request.body))
 
                 if (('username' in parameters) and
-                        ('password' in parameters) and
-                        ('status' in parameters) and
-                        ('first name' in parameters) and
-                        ('patronymic' in parameters) and
-                        ('last name' in parameters) and
-                        ('sex' in parameters) and
-                        ('date of birth' in parameters) and
-                        ('email' in parameters) and
-                        ('phone number' in parameters) and
-                        (len(parameters) == 10)
+                        ('new username' in parameters) and
+                        ('new password' in parameters) and
+                        ('new status' in parameters) and
+                        ('new first name' in parameters) and
+                        ('new patronymic' in parameters) and
+                        ('new last name' in parameters) and
+                        ('new sex' in parameters) and
+                        ('new date of birth' in parameters) and
+                        ('new email' in parameters) and
+                        ('new phone number' in parameters) and
+                        (len(parameters) == 11)
                 ):
                     if get_user_model().objects.filter(username=parameters['username']).exists():
                         user = get_user_model().objects.get(username=parameters['username'])
-                        user.username = parameters['username']
-                        user.first_name = parameters['first name']
-                        user.patronymic = parameters['patronymic']
-                        user.last_name = parameters['last name']
-                        user.sex = parameters['sex']
-                        user.date_of_birth = datetime.date(*list(map(int, parameters['date of birth'].split())))
-                        user.email = parameters['email']
-                        user.phone_number = parameters['phone number']
-                        user.set_password(raw_password=parameters['password'])
+
+                        if parameters['new username']:
+                            user.username = parameters['new username']
+                        if parameters['new first name']:
+                            user.first_name = parameters['new first name']
+                        if parameters['new patronymic']:
+                            user.patronymic = parameters['new patronymic']
+                        if parameters['new last name']:
+                            user.last_name = parameters['new last name']
+                        if parameters['new sex']:
+                            user.sex = parameters['new sex']
+                        if parameters['new date of birth']:
+                            user.date_of_birth = datetime.date(*list(map(int, parameters['new date of birth'].split())))
+                        if parameters['new email']:
+                            user.email = parameters['new email']
+                        if parameters['new phone number']:
+                            user.phone_number = parameters['new phone number']
+                        if parameters['new password']:
+                            user.set_password(raw_password=parameters['new password'])
+
                         user.save()
 
-                        admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
-                        operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
-                        spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
+                        if parameters['new status']:
+                            admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
+                            operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
+                            spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
 
-                        if admin_group_created:
-                            admin_group.permissions.add(21)
-                            admin_group.permissions.add(22)
-                            admin_group.permissions.add(23)
-                            admin_group.permissions.add(24)
-                            admin_group.permissions.add(25)
-                            admin_group.permissions.add(26)
-                            admin_group.permissions.add(27)
-                            admin_group.permissions.add(28)
-                            admin_group.permissions.add(29)
-                            admin_group.permissions.add(30)
-                            admin_group.permissions.add(31)
-                            admin_group.permissions.add(32)
+                            if admin_group_created:
+                                admin_group.permissions.add(21)
+                                admin_group.permissions.add(22)
+                                admin_group.permissions.add(23)
+                                admin_group.permissions.add(24)
+                                admin_group.permissions.add(25)
+                                admin_group.permissions.add(26)
+                                admin_group.permissions.add(27)
+                                admin_group.permissions.add(28)
+                                admin_group.permissions.add(29)
+                                admin_group.permissions.add(30)
+                                admin_group.permissions.add(31)
+                                admin_group.permissions.add(32)
 
-                        if operator_group_created:
-                            operator_group.permissions.add(25)
-                            operator_group.permissions.add(26)
-                            operator_group.permissions.add(27)
-                            operator_group.permissions.add(28)
-                            operator_group.permissions.add(29)
-                            operator_group.permissions.add(32)
+                            if operator_group_created:
+                                operator_group.permissions.add(25)
+                                operator_group.permissions.add(26)
+                                operator_group.permissions.add(27)
+                                operator_group.permissions.add(28)
+                                operator_group.permissions.add(29)
+                                operator_group.permissions.add(32)
 
-                        if spectator_group_created:
-                            spectator_group.permissions.add(32)
+                            if spectator_group_created:
+                                spectator_group.permissions.add(32)
 
-                        if user.groups.filter(name='Admin').exists():
-                            user.groups.remove(admin_group)
-                        elif user.groups.filter(name='Operator').exists():
-                            user.groups.remove(operator_group)
-                        elif user.groups.filter(name='Spectator').exists():
-                            user.groups.remove(spectator_group)
+                            if user.groups.filter(name='Admin').exists():
+                                user.groups.remove(admin_group)
+                            elif user.groups.filter(name='Operator').exists():
+                                user.groups.remove(operator_group)
+                            elif user.groups.filter(name='Spectator').exists():
+                                user.groups.remove(spectator_group)
 
-                        match parameters['status']:
-                            case 'Admin':
-                                user.groups.add(admin_group)
-                            case 'Operator':
-                                user.groups.add(operator_group)
-                            case 'Spectator':
-                                user.groups.add(spectator_group)
+                            match parameters['new status']:
+                                case 'Admin':
+                                    user.groups.add(admin_group)
+                                case 'Operator':
+                                    user.groups.add(operator_group)
+                                case 'Spectator':
+                                    user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
                                   'Massage': 'Changed.'}
