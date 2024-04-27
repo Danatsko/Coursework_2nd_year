@@ -55,43 +55,41 @@ def user_registration(request):
                         user.set_password(raw_password=parameters['password'])
                         user.save()
 
+                        admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
+                        operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
+                        spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
+
+                        if admin_group_created:
+                            admin_group.permissions.add(21)
+                            admin_group.permissions.add(22)
+                            admin_group.permissions.add(23)
+                            admin_group.permissions.add(24)
+                            admin_group.permissions.add(25)
+                            admin_group.permissions.add(26)
+                            admin_group.permissions.add(27)
+                            admin_group.permissions.add(28)
+                            admin_group.permissions.add(29)
+                            admin_group.permissions.add(30)
+                            admin_group.permissions.add(31)
+                            admin_group.permissions.add(32)
+
+                        if operator_group_created:
+                            operator_group.permissions.add(25)
+                            operator_group.permissions.add(26)
+                            operator_group.permissions.add(27)
+                            operator_group.permissions.add(28)
+                            operator_group.permissions.add(29)
+                            operator_group.permissions.add(32)
+
+                        if spectator_group_created:
+                            spectator_group.permissions.add(32)
+
                         match parameters['status']:
                             case 'Admin':
-                                admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
-
-                                if admin_group_created:
-                                    admin_group.permissions.add(21)
-                                    admin_group.permissions.add(22)
-                                    admin_group.permissions.add(23)
-                                    admin_group.permissions.add(24)
-                                    admin_group.permissions.add(25)
-                                    admin_group.permissions.add(26)
-                                    admin_group.permissions.add(27)
-                                    admin_group.permissions.add(28)
-                                    admin_group.permissions.add(29)
-                                    admin_group.permissions.add(30)
-                                    admin_group.permissions.add(31)
-                                    admin_group.permissions.add(32)
-
                                 user.groups.add(admin_group)
                             case 'Operator':
-                                operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
-
-                                if operator_group_created:
-                                    operator_group.permissions.add(25)
-                                    operator_group.permissions.add(26)
-                                    operator_group.permissions.add(27)
-                                    operator_group.permissions.add(28)
-                                    operator_group.permissions.add(29)
-                                    operator_group.permissions.add(32)
-
                                 user.groups.add(operator_group)
                             case 'Spectator':
-                                spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
-
-                                if spectator_group_created:
-                                    spectator_group.permissions.add(32)
-
                                 user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
