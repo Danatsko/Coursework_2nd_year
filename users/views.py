@@ -1,10 +1,16 @@
 import datetime
 import json
 
-from django.contrib.auth import authenticate, login, get_user_model, logout
+from django.contrib.auth import (authenticate,
+                                 login,
+                                 get_user_model,
+                                 logout
+                                 )
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.views.decorators.csrf import (csrf_exempt,
+                                          csrf_protect
+                                          )
 
 
 @csrf_protect
