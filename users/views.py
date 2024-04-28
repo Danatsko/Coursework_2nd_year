@@ -332,6 +332,70 @@ def user_delete(request):
     return JsonResponse(answer)
 
 
+@csrf_protect
+def users_view(request):
+    if request.user.is_authenticated:
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+
+        if admin_group_created:
+            admin_group.permissions.add(21)
+            admin_group.permissions.add(22)
+            admin_group.permissions.add(23)
+            admin_group.permissions.add(24)
+            admin_group.permissions.add(25)
+            admin_group.permissions.add(26)
+            admin_group.permissions.add(27)
+            admin_group.permissions.add(28)
+            admin_group.permissions.add(29)
+            admin_group.permissions.add(30)
+            admin_group.permissions.add(31)
+            admin_group.permissions.add(32)
+
+        if (request.user.groups.filter(name='Admin').exists()):
+            if request.method == 'POST':
+                answer = {}
+                users = get_user_model().objects.all()
+
+                for user in users:
+                    status = ''
+
+                    if user.groups.filter(name='Admin').exists():
+                        status = 'Admin'
+                    elif user.groups.filter(name='Operator').exists():
+                        status = 'Operator'
+                    elif user.groups.filter(name='Taxi driver').exists():
+                        status = 'Taxi driver'
+                    elif user.groups.filter(name='Spectator').exists():
+                        status = 'Spectator'
+
+                    information = {'username': user.username,
+                                   'status': status,
+                                   'first name': user.first_name,
+                                   'patronymic': user.patronymic,
+                                   'last name': user.last_name,
+                                   'sex': user.sex,
+                                   'date of birth': user.date_of_birth,
+                                   'email': user.email,
+                                   'phone number': user.phone_number,
+                                   }
+
+                    answer[user.username] = information
+            else:
+                answer = {'Status': 'Fail',
+                          'Message': 'Wrong method.'
+                          }
+        else:
+            answer = {'Status': 'Fail',
+                      'Message': 'No permission.'
+                      }
+    else:
+        answer = {'Status': 'Fail',
+                  'Message': 'Not authenticated.'
+                  }
+
+    return JsonResponse(answer)
+
+
 @csrf_exempt
 def user_login(request):
     if request.user.is_authenticated == False:
