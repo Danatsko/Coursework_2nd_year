@@ -383,3 +383,60 @@ def active_orders_delete(request):
                   }
 
     return JsonResponse(answer)
+
+
+@csrf_protect
+def completed_orders_delete(request):
+    if request.user.is_authenticated:
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+
+        if admin_group_created:
+            admin_group.permissions.add(21)
+            admin_group.permissions.add(22)
+            admin_group.permissions.add(23)
+            admin_group.permissions.add(24)
+            admin_group.permissions.add(25)
+            admin_group.permissions.add(26)
+            admin_group.permissions.add(27)
+            admin_group.permissions.add(28)
+            admin_group.permissions.add(29)
+            admin_group.permissions.add(30)
+            admin_group.permissions.add(31)
+            admin_group.permissions.add(32)
+
+        if request.user.groups.filter(name='Admin').exists():
+            if request.method == 'POST':
+                parameters = dict(json.loads(request.body))
+
+                if (('id' in parameters) and
+                        (len(parameters) == 1)
+                ):
+                    if CompletedOrders.objects.filter(id=parameters['id']).exists():
+                        order = CompletedOrders.objects.get(id=parameters['id'])
+                        order.delete()
+
+                        answer = {'Status': 'Success',
+                                  'Message': 'Deleted.'
+                                  }
+                    else:
+                        answer = {'Status': 'Fail',
+                                  'Message': 'Completed order does not exist.'
+                                  }
+                else:
+                    answer = {'Status': 'Fail',
+                              'Message': 'Wrong parameters.'
+                              }
+            else:
+                answer = {'Status': 'Fail',
+                          'Message': 'Wrong method.'
+                          }
+        else:
+            answer = {'Status': 'Fail',
+                      'Message': 'No permission.'
+                      }
+    else:
+        answer = {'Status': 'Fail',
+                  'Message': 'Not authenticated.'
+                  }
+
+    return JsonResponse(answer)
