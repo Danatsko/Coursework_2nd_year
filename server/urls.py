@@ -28,7 +28,8 @@ from orders.views import (active_orders_add,
                           completed_orders_change_information,
                           active_orders_delete,
                           completed_orders_delete,
-                          active_orders_view
+                          active_orders_view,
+                          completed_orders_view
                           )
 
 urlpatterns = [
@@ -47,4 +48,5 @@ urlpatterns = [
     path('active_orders_delete/', active_orders_delete),
     path('completed_orders_delete/', completed_orders_delete),
     path('active_orders_view/', active_orders_view),
+    path('completed_orders_view/', completed_orders_view),
 ]

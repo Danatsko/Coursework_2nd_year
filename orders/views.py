@@ -505,3 +505,69 @@ def active_orders_view(request):
                   }
 
     return JsonResponse(answer)
+
+
+@csrf_protect
+def completed_orders_view(request):
+    if request.user.is_authenticated:
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
+        spectator_group, spectator_group_created = Group.objects.get_or_create(name='Spectator')
+
+        if admin_group_created:
+            admin_group.permissions.add(21)
+            admin_group.permissions.add(22)
+            admin_group.permissions.add(23)
+            admin_group.permissions.add(24)
+            admin_group.permissions.add(25)
+            admin_group.permissions.add(26)
+            admin_group.permissions.add(27)
+            admin_group.permissions.add(28)
+            admin_group.permissions.add(29)
+            admin_group.permissions.add(30)
+            admin_group.permissions.add(31)
+            admin_group.permissions.add(32)
+
+        if operator_group_created:
+            operator_group.permissions.add(25)
+            operator_group.permissions.add(26)
+            operator_group.permissions.add(27)
+            operator_group.permissions.add(28)
+            operator_group.permissions.add(29)
+            operator_group.permissions.add(32)
+
+        if spectator_group_created:
+            spectator_group.permissions.add(32)
+
+        if (request.user.groups.filter(name='Admin').exists() or
+                request.user.groups.filter(name='Operator').exists() or
+                request.user.groups.filter(name='Spectator').exists()
+        ):
+            if request.method == 'POST':
+                answer = {}
+                orders = CompletedOrders.objects.all()
+
+                for order in orders:
+                    information = {'taxi driver': order.taxi_driver,
+                                   'opening time': order.opening_time,
+                                   'closing time': order.closing_time,
+                                   'starting address': order.starting_address,
+                                   'final address': order.final_address,
+                                   'price': order.price
+                                   }
+
+                    answer[order.id] = information
+            else:
+                answer = {'Status': 'Fail',
+                          'Message': 'Wrong method.'
+                          }
+        else:
+            answer = {'Status': 'Fail',
+                      'Message': 'No permission.'
+                      }
+    else:
+        answer = {'Status': 'Fail',
+                  'Message': 'Not authenticated.'
+                  }
+
+    return JsonResponse(answer)
