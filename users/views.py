@@ -61,9 +61,10 @@ def user_registration(request):
                         user.set_password(raw_password=parameters['password'])
                         user.save()
 
-                        admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
-                        operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
-                        spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
+                        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+                        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
+                        taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
+                        spectator_group, spectator_group_created = Group.objects.get_or_create(name='Spectator')
 
                         if admin_group_created:
                             admin_group.permissions.add(21)
@@ -87,6 +88,11 @@ def user_registration(request):
                             operator_group.permissions.add(29)
                             operator_group.permissions.add(32)
 
+                        if taxi_driver_group_created:
+                            taxi_driver_group.permissions.add(27)
+                            taxi_driver_group.permissions.add(28)
+                            taxi_driver_group.permissions.add(29)
+
                         if spectator_group_created:
                             spectator_group.permissions.add(32)
 
@@ -95,6 +101,8 @@ def user_registration(request):
                                 user.groups.add(admin_group)
                             case 'Operator':
                                 user.groups.add(operator_group)
+                            case 'Taxi driver':
+                                user.groups.add(taxi_driver_group)
                             case 'Spectator':
                                 user.groups.add(spectator_group)
 
