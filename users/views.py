@@ -16,7 +16,7 @@ from django.views.decorators.csrf import (csrf_exempt,
 @csrf_protect
 def user_registration(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
 
         if admin_group_created:
             admin_group.permissions.add(21)
@@ -136,7 +136,7 @@ def user_registration(request):
 @csrf_protect
 def user_change_information(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
 
         if admin_group_created:
             admin_group.permissions.add(21)
@@ -194,10 +194,10 @@ def user_change_information(request):
                         user.save()
 
                         if parameters['new status']:
-                            admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
-                            operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
+                            admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+                            operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
                             taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
-                            spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
+                            spectator_group, spectator_group_created = Group.objects.get_or_create(name='Spectator')
 
                             if admin_group_created:
                                 admin_group.permissions.add(21)
@@ -278,7 +278,7 @@ def user_change_information(request):
 @csrf_protect
 def user_delete(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
 
         if admin_group_created:
             admin_group.permissions.add(21)
