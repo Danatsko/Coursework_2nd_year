@@ -27,7 +27,8 @@ from orders.views import (active_orders_add,
                           active_orders_change_information,
                           completed_orders_change_information,
                           active_orders_delete,
-                          completed_orders_delete
+                          completed_orders_delete,
+                          active_orders_view
                           )
 
 urlpatterns = [
@@ -45,4 +46,5 @@ urlpatterns = [
     path('completed_orders_change_information/', completed_orders_change_information),
     path('active_orders_delete/', active_orders_delete),
     path('completed_orders_delete/', completed_orders_delete),
+    path('active_orders_view/', active_orders_view),
 ]

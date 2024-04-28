@@ -440,3 +440,68 @@ def completed_orders_delete(request):
                   }
 
     return JsonResponse(answer)
+
+
+@csrf_protect
+def active_orders_view(request):
+    if request.user.is_authenticated:
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
+        taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
+
+        if admin_group_created:
+            admin_group.permissions.add(21)
+            admin_group.permissions.add(22)
+            admin_group.permissions.add(23)
+            admin_group.permissions.add(24)
+            admin_group.permissions.add(25)
+            admin_group.permissions.add(26)
+            admin_group.permissions.add(27)
+            admin_group.permissions.add(28)
+            admin_group.permissions.add(29)
+            admin_group.permissions.add(30)
+            admin_group.permissions.add(31)
+            admin_group.permissions.add(32)
+
+        if operator_group_created:
+            operator_group.permissions.add(25)
+            operator_group.permissions.add(26)
+            operator_group.permissions.add(27)
+            operator_group.permissions.add(28)
+            operator_group.permissions.add(29)
+            operator_group.permissions.add(32)
+
+        if taxi_driver_group_created:
+            taxi_driver_group.permissions.add(27)
+            taxi_driver_group.permissions.add(28)
+            taxi_driver_group.permissions.add(29)
+
+        if (request.user.groups.filter(name='Admin').exists() or
+                request.user.groups.filter(name='Operator').exists() or
+                request.user.groups.filter(name='Taxi driver').exists()
+        ):
+            if request.method == 'POST':
+                answer = {}
+                orders = ActiveOrders.objects.all()
+
+                for order in orders:
+                    information = {'opening time': order.opening_time,
+                                   'starting address': order.starting_address,
+                                   'final address': order.final_address
+                                   }
+
+                    answer[order.id] = information
+            else:
+                answer = {'Status': 'Fail',
+                          'Message': 'Wrong method.'
+                          }
+        else:
+            answer = {'Status': 'Fail',
+                      'Message': 'No permission.'
+                      }
+    else:
+        answer = {'Status': 'Fail',
+                  'Message': 'Not authenticated.'
+                  }
+
+    return JsonResponse(answer)
