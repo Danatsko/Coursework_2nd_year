@@ -107,27 +107,27 @@ def user_registration(request):
                                 user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Created.'
+                                  'Message': 'Created.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Massage': 'User exists.'
+                                  'Message': 'User exists.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Massage': 'Wrong parameters.'
+                              'Message': 'Wrong parameters.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Massage': 'Wrong method.'
+                          'Message': 'Wrong method.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Massage': 'No permission.'
+                      'Message': 'No permission.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Massage': 'Not authenticated.'
+                  'Message': 'Not authenticated.'
                   }
 
     return JsonResponse(answer)
@@ -249,27 +249,27 @@ def user_change_information(request):
                                     user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Changed.'
+                                  'Message': 'Changed.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Massage': 'User does not exist.'
+                                  'Message': 'User does not exist.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Massage': 'Wrong parameters.'
+                              'Message': 'Wrong parameters.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Massage': 'Wrong method.'
+                          'Message': 'Wrong method.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Massage': 'No permission.'
+                      'Message': 'No permission.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Massage': 'Not authenticated.'
+                  'Message': 'Not authenticated.'
                   }
 
     return JsonResponse(answer)
@@ -306,27 +306,27 @@ def user_delete(request):
                         user.delete()
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Deleted.'
+                                  'Message': 'Deleted.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Massage': 'User does not exist.'
+                                  'Message': 'User does not exist.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Massage': 'Wrong parameters.'
+                              'Message': 'Wrong parameters.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Massage': 'Wrong method.'
+                          'Message': 'Wrong method.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Massage': 'No permission.'
+                      'Message': 'No permission.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Massage': 'Not authenticated.'
+                  'Message': 'Not authenticated.'
                   }
 
     return JsonResponse(answer)
@@ -352,27 +352,27 @@ def user_login(request):
                         login(request, user_authentication)
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Login.'
+                                  'Message': 'Login.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Massage': 'Wrong password.'
+                                  'Message': 'Wrong password.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Massage': 'User does not exist.'
+                              'Message': 'User does not exist.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Massage': 'Wrong parameters.'
+                          'Message': 'Wrong parameters.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Massage': 'Wrong method.'
+                      'Message': 'Wrong method.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Massage': 'Authenticated.'
+                  'Message': 'Authenticated.'
                   }
 
     return JsonResponse(answer)
@@ -385,15 +385,15 @@ def user_logaut(request):
             logout(request)
 
             answer = {'Status': 'Success',
-                      'Massage': 'Logaut.'
+                      'Message': 'Logaut.'
                       }
         else:
             answer = {'Status': 'Fail',
-                      'Massage': 'Wrong method.'
+                      'Message': 'Wrong method.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Massage': 'Not authenticated.'
+                  'Message': 'Not authenticated.'
                   }
 
     return JsonResponse(answer)
