@@ -107,7 +107,8 @@ def user_registration(request):
                                 user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Created.'}
+                                  'Massage': 'Created.'
+                                  }
                     else:
                         answer = {'Status': 'Fail',
                                   'Massage': 'User exists.'
@@ -248,7 +249,8 @@ def user_change_information(request):
                                     user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Changed.'}
+                                  'Massage': 'Changed.'
+                                  }
                     else:
                         answer = {'Status': 'Fail',
                                   'Massage': 'User does not exist.'
@@ -304,7 +306,8 @@ def user_delete(request):
                         user.delete()
 
                         answer = {'Status': 'Success',
-                                  'Massage': 'Deleted.'}
+                                  'Massage': 'Deleted.'
+                                  }
                     else:
                         answer = {'Status': 'Fail',
                                   'Massage': 'User does not exist.'
