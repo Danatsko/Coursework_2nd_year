@@ -23,7 +23,8 @@ from users.views import (user_registration,
                          user_logaut
                          )
 from orders.views import (active_orders_add,
-                          completed_orders_add)
+                          completed_orders_add,
+                          active_orders_change_information)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +37,5 @@ urlpatterns = [
 
     path('active_orders_add/', active_orders_add),
     path('completed_orders_add/', completed_orders_add),
+    path('active_orders_change_information/', active_orders_change_information),
 ]
