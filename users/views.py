@@ -195,6 +195,7 @@ def user_change_information(request):
                         if parameters['new status']:
                             admin_group, admin_group_created = Group.objects.get_or_create(name="Admin")
                             operator_group, operator_group_created = Group.objects.get_or_create(name="Operator")
+                            taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
                             spectator_group, spectator_group_created = Group.objects.get_or_create(name="Spectator")
 
                             if admin_group_created:
@@ -219,6 +220,11 @@ def user_change_information(request):
                                 operator_group.permissions.add(29)
                                 operator_group.permissions.add(32)
 
+                            if taxi_driver_group_created:
+                                taxi_driver_group.permissions.add(27)
+                                taxi_driver_group.permissions.add(28)
+                                taxi_driver_group.permissions.add(29)
+
                             if spectator_group_created:
                                 spectator_group.permissions.add(32)
 
@@ -226,6 +232,8 @@ def user_change_information(request):
                                 user.groups.remove(admin_group)
                             elif user.groups.filter(name='Operator').exists():
                                 user.groups.remove(operator_group)
+                            elif user.groups.filter(name='Taxi driver').exists():
+                                user.groups.remove(taxi_driver_group)
                             elif user.groups.filter(name='Spectator').exists():
                                 user.groups.remove(spectator_group)
 
@@ -234,6 +242,8 @@ def user_change_information(request):
                                     user.groups.add(admin_group)
                                 case 'Operator':
                                     user.groups.add(operator_group)
+                                case 'Taxi driver':
+                                    user.groups.add(taxi_driver_group)
                                 case 'Spectator':
                                     user.groups.add(spectator_group)
 
