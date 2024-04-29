@@ -415,8 +415,20 @@ def user_login(request):
                     if user_authentication:
                         login(request, user_authentication)
 
+                        user_group = ''
+
+                        if user_authentication.groups.filter(name='Admin').exists():
+                            user_group = 'Admin'
+                        elif user_authentication.groups.filter(name='Operator').exists():
+                            user_group = 'Operator'
+                        elif user_authentication.groups.filter(name='Taxi driver').exists():
+                            user_group = 'Taxi driver'
+                        elif user_authentication.groups.filter(name='Spectator').exists():
+                            user_group = 'Spectator'
+
                         answer = {'Status': 'Success',
-                                  'Message': 'Login.'
+                                  'Message': 'Login.',
+                                  'User group': user_group
                                   }
                     else:
                         answer = {'Status': 'Fail',
