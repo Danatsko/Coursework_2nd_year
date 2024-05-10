@@ -480,7 +480,7 @@ def active_orders_view(request):
                 request.user.groups.filter(name='Operator').exists() or
                 request.user.groups.filter(name='Taxi driver').exists()
         ):
-            if request.method == 'POST':
+            if request.method == 'GET':
                 answer = {}
                 orders = ActiveOrders.objects.all()
 
