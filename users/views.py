@@ -352,7 +352,7 @@ def users_view(request):
             admin_group.permissions.add(32)
 
         if (request.user.groups.filter(name='Admin').exists()):
-            if request.method == 'POST':
+            if request.method == 'GET':
                 answer = {}
                 users = get_user_model().objects.all()
 
