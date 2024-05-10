@@ -543,7 +543,7 @@ def completed_orders_view(request):
                 request.user.groups.filter(name='Operator').exists() or
                 request.user.groups.filter(name='Spectator').exists()
         ):
-            if request.method == 'POST':
+            if request.method == 'GET':
                 answer = {}
                 orders = CompletedOrders.objects.all()
 
