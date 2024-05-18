@@ -39,7 +39,7 @@ def active_orders_add(request):
 
         if request.user.groups.filter(name='Admin').exists() or request.user.groups.filter(name='Operator').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('opening time' in parameters) and
                         ('starting address' in parameters) and
@@ -114,7 +114,7 @@ def completed_orders_add(request):
                 request.user.groups.filter(name='Taxi driver').exists()
         ):
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('taxi driver' in parameters) and
                         ('opening time' in parameters) and
@@ -186,7 +186,7 @@ def active_orders_change_information(request):
 
         if request.user.groups.filter(name='Admin').exists() or request.user.groups.filter(name='Operator').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('id' in parameters) and
                         ('new opening time' in parameters) and
@@ -254,7 +254,7 @@ def completed_orders_change_information(request):
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('id' in parameters) and
                         ('new taxi driver' in parameters) and
@@ -349,7 +349,7 @@ def active_orders_delete(request):
                 request.user.groups.filter(name='Taxi driver').exists()
         ):
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('id' in parameters) and
                         (len(parameters) == 1)
@@ -406,7 +406,7 @@ def completed_orders_delete(request):
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('id' in parameters) and
                         (len(parameters) == 1)
