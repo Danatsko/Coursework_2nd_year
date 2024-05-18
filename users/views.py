@@ -34,7 +34,7 @@ def user_registration(request):
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('username' in parameters) and
                         ('password' in parameters) and
@@ -154,7 +154,7 @@ def user_change_information(request):
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('username' in parameters) and
                         ('new username' in parameters) and
@@ -296,7 +296,7 @@ def user_delete(request):
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
-                parameters = dict(json.loads(request.body))
+                parameters = request.POST
 
                 if (('username' in parameters) and
                         (len(parameters) == 1)
@@ -400,7 +400,7 @@ def users_view(request):
 def user_login(request):
     if request.user.is_authenticated == False:
         if request.method == 'POST':
-            parameters = dict(json.loads(request.body))
+            parameters = request.POST
 
             if (('username' in parameters) and
                     ('password' in parameters) and
