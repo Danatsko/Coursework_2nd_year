@@ -209,9 +209,15 @@ def active_orders_change_information(request):
                         if parameters['new opening time']:
                             order.opening_time = datetime.datetime(*list(map(int, parameters['new opening time'].split())))
                         if parameters['new starting address']:
+                            new_starting_address_data = nominatim.geocode(parameters['new starting address']).raw
+
                             order.starting_address = parameters['new starting address']
+                            order.starting_address_coordinates = f'{new_starting_address_data["lat"]} {new_starting_address_data["lon"]}'
                         if parameters['new final address']:
+                            new_final_address_data = nominatim.geocode(parameters['new final address']).raw
+
                             order.final_address = parameters['new final address']
+                            order.final_address_coordinates = f'{new_final_address_data["lat"]} {new_final_address_data["lon"]}'
 
                         order.save()
 
