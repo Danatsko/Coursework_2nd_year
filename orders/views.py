@@ -502,7 +502,9 @@ def active_orders_view(request):
                 for order in orders:
                     information = {'opening time': order.opening_time,
                                    'starting address': order.starting_address,
-                                   'final address': order.final_address
+                                   'starting address coordinates': order.starting_address_coordinates,
+                                   'final address': order.final_address,
+                                   'final address coordinates': order.final_address_coordinates
                                    }
 
                     answer[order.id] = information
