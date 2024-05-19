@@ -1,5 +1,6 @@
 import datetime
-import json
+
+from geopy.geocoders import Nominatim
 
 from django.contrib.auth.models import Group
 from django.http import JsonResponse
@@ -7,6 +8,9 @@ from django.views.decorators.csrf import csrf_protect
 
 from orders.models import (ActiveOrders,
                            CompletedOrders)
+
+
+nominatim = Nominatim(user_agent='Program')
 
 
 @csrf_protect
@@ -46,9 +50,14 @@ def active_orders_add(request):
                         ('final address' in parameters) and
                         (len(parameters) == 3)
                 ):
+                    starting_address_data = nominatim.geocode(parameters['starting address']).raw
+                    final_address_data = nominatim.geocode(parameters['final address']).raw
+
                     order = ActiveOrders(opening_time=datetime.datetime(*list(map(int, parameters['opening time'].split()))),
                                          starting_address=parameters['starting address'],
-                                         final_address=parameters['final address']
+                                         starting_address_coordinates=f'{starting_address_data["lat"]} {starting_address_data["lon"]}',
+                                         final_address=parameters['final address'],
+                                         final_address_coordinates=f'{final_address_data["lat"]} {final_address_data["lon"]}'
                                          )
                     order.save()
 
