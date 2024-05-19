@@ -4,7 +4,9 @@ from django.db import models
 class ActiveOrders(models.Model):
     opening_time = models.DateTimeField(verbose_name='Час відкриття замовлення')
     starting_address = models.TextField(verbose_name='Початкова адреса')
+    starting_address_coordinates = models.TextField(verbose_name='Координати початкової адреси')
     final_address = models.TextField(verbose_name='Кінцева адреса')
+    final_address_coordinates = models.TextField(verbose_name='Координати кінцевої адреси')
 
     def __str__(self):
         return 'Активні замовлення'
