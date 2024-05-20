@@ -50,14 +50,23 @@ def active_orders_add(request):
                         ('final address' in parameters) and
                         (len(parameters) == 3)
                 ):
-                    starting_address_data = nominatim.geocode(parameters['starting address']).raw
-                    final_address_data = nominatim.geocode(parameters['final address']).raw
+                    if parameters['starting address']:
+                        starting_address_data = nominatim.geocode(parameters['starting address']).raw
+                        starting_address_coordinates = f'{starting_address_data["lat"]} {starting_address_data["lon"]}'
+                    else:
+                        starting_address_coordinates = ''
+
+                    if parameters['final address']:
+                        final_address_data = nominatim.geocode(parameters['final address']).raw
+                        final_address_coordinates= f'{final_address_data["lat"]} {final_address_data["lon"]}'
+                    else:
+                        final_address_coordinates = ''
 
                     order = ActiveOrders(opening_time=datetime.datetime(*list(map(int, parameters['opening time'].split()))),
                                          starting_address=parameters['starting address'],
-                                         starting_address_coordinates=f'{starting_address_data["lat"]} {starting_address_data["lon"]}',
+                                         starting_address_coordinates=starting_address_coordinates,
                                          final_address=parameters['final address'],
-                                         final_address_coordinates=f'{final_address_data["lat"]} {final_address_data["lon"]}'
+                                         final_address_coordinates=final_address_coordinates
                                          )
                     order.save()
 
