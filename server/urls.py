@@ -21,7 +21,8 @@ from users.views import (user_registration,
                          user_delete,
                          user_login,
                          user_logaut,
-                         users_view
+                         users_view,
+                         taxi_driver_coordinates_change_information
                          )
 from orders.views import (active_orders_add,
                           completed_orders_add,
@@ -39,9 +40,10 @@ urlpatterns = [
     path('registration/', user_registration),
     path('user_change_information/', user_change_information),
     path('user_delete/', user_delete),
+    path('users_view/', users_view),
+    path('taxi_driver_coordinates_change_information/', taxi_driver_coordinates_change_information),
     path('login/', user_login),
     path('logaut/', user_logaut),
-    path('users_view/', users_view),
 
     path('active_orders_add/', active_orders_add),
     path('completed_orders_add/', completed_orders_add),
