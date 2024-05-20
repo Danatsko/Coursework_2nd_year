@@ -462,6 +462,90 @@ def users_view(request):
     return JsonResponse(answer)
 
 
+@csrf_protect
+def taxi_driver_coordinates_change_information(request):
+    if request.user.is_authenticated:
+        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+        taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
+
+        if admin_group_created:
+            admin_group.permissions.add(21)
+            admin_group.permissions.add(22)
+            admin_group.permissions.add(23)
+            admin_group.permissions.add(24)
+            admin_group.permissions.add(25)
+            admin_group.permissions.add(26)
+            admin_group.permissions.add(27)
+            admin_group.permissions.add(28)
+            admin_group.permissions.add(29)
+            admin_group.permissions.add(30)
+            admin_group.permissions.add(31)
+            admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
+
+        if taxi_driver_group_created:
+            taxi_driver_group.permissions.add(27)
+            taxi_driver_group.permissions.add(28)
+            taxi_driver_group.permissions.add(29)
+            taxi_driver_group.permissions.add(33)
+            taxi_driver_group.permissions.add(34)
+
+        if (request.user.groups.filter(name='Admin').exists() or
+                request.user.groups.filter(name='Taxi driver').exists()
+        ):
+            if request.method == 'POST':
+                parameters = request.POST
+
+                if (('id' in parameters) and
+                        ('new online status' in parameters) and
+                        ('new coordinates' in parameters) and
+                        (len(parameters) == 3)
+                ):
+                    if request.user.groups.filter(name='Taxi driver').exists():
+                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=request.user.id)
+
+                        taxi_driver_coordinates.taxi_driver_status = parameters['new online status']
+                        taxi_driver_coordinates.taxi_driver_coordinates = parameters['new coordinates']
+
+                        answer = {'Status': 'Success',
+                                  'Message': 'Changed.'
+                                  }
+                    elif TaxiDriversCoordinates.objects.filter(taxi_driver_id=parameters['id']).exists():
+                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=parameters['id'])
+
+                        taxi_driver_coordinates.taxi_driver_status = parameters['new online status']
+                        taxi_driver_coordinates.taxi_driver_coordinates = parameters['new coordinates']
+
+                        answer = {'Status': 'Success',
+                                  'Message': 'Changed.'
+                                  }
+                    else:
+                        answer = {'Status': 'Fail',
+                                  'Message': 'User does not exist.'
+                                  }
+                else:
+                    answer = {'Status': 'Fail',
+                              'Message': 'Wrong parameters.'
+                              }
+            else:
+                answer = {'Status': 'Fail',
+                          'Message': 'Wrong method.'
+                          }
+        else:
+            answer = {'Status': 'Fail',
+                      'Message': 'No permission.'
+                      }
+    else:
+        answer = {'Status': 'Fail',
+                  'Message': 'Not authenticated.'
+                  }
+
+    return JsonResponse(answer)
+
+
 @csrf_exempt
 def user_login(request):
     if request.user.is_authenticated == False:
