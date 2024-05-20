@@ -265,7 +265,7 @@ def user_change_information(request):
                             elif user.groups.filter(name='Taxi driver').exists():
                                 user.groups.remove(taxi_driver_group)
 
-                                taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(id=user.id)
+                                taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=user.id)
                                 taxi_driver_coordinates.delete()
                             elif user.groups.filter(name='Spectator').exists():
                                 user.groups.remove(spectator_group)
@@ -347,7 +347,7 @@ def user_delete(request):
                         user = get_user_model().objects.get(username=parameters['username'])
 
                         if user.groups.filter(name='Taxi driver').exists():
-                            taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(id=user.id)
+                            taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=user.id)
                             taxi_driver_coordinates.delete()
 
                         user.delete()
@@ -416,7 +416,7 @@ def users_view(request):
                         status = 'Operator'
                     elif user.groups.filter(name='Taxi driver').exists():
                         status = 'Taxi driver'
-                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(id=users.id)
+                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=users.id)
                     elif user.groups.filter(name='Spectator').exists():
                         status = 'Spectator'
 
