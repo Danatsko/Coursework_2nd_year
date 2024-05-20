@@ -32,6 +32,10 @@ def active_orders_add(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if operator_group_created:
             operator_group.permissions.add(25)
@@ -40,6 +44,7 @@ def active_orders_add(request):
             operator_group.permissions.add(28)
             operator_group.permissions.add(29)
             operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
 
         if request.user.groups.filter(name='Admin').exists() or request.user.groups.filter(name='Operator').exists():
             if request.method == 'POST':
@@ -113,6 +118,10 @@ def completed_orders_add(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if operator_group_created:
             operator_group.permissions.add(25)
@@ -121,11 +130,14 @@ def completed_orders_add(request):
             operator_group.permissions.add(28)
             operator_group.permissions.add(29)
             operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
 
         if taxi_driver_group_created:
             taxi_driver_group.permissions.add(27)
             taxi_driver_group.permissions.add(28)
             taxi_driver_group.permissions.add(29)
+            taxi_driver_group.permissions.add(33)
+            taxi_driver_group.permissions.add(34)
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
@@ -193,6 +205,10 @@ def active_orders_change_information(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if operator_group_created:
             operator_group.permissions.add(25)
@@ -201,6 +217,7 @@ def active_orders_change_information(request):
             operator_group.permissions.add(28)
             operator_group.permissions.add(29)
             operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
 
         if request.user.groups.filter(name='Admin').exists() or request.user.groups.filter(name='Operator').exists():
             if request.method == 'POST':
@@ -275,6 +292,10 @@ def completed_orders_change_information(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
@@ -354,6 +375,10 @@ def active_orders_delete(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if operator_group_created:
             operator_group.permissions.add(25)
@@ -362,11 +387,14 @@ def active_orders_delete(request):
             operator_group.permissions.add(28)
             operator_group.permissions.add(29)
             operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
 
         if taxi_driver_group_created:
             taxi_driver_group.permissions.add(27)
             taxi_driver_group.permissions.add(28)
             taxi_driver_group.permissions.add(29)
+            taxi_driver_group.permissions.add(33)
+            taxi_driver_group.permissions.add(34)
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
@@ -427,6 +455,10 @@ def completed_orders_delete(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
@@ -486,6 +518,10 @@ def active_orders_view(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if operator_group_created:
             operator_group.permissions.add(25)
@@ -494,11 +530,14 @@ def active_orders_view(request):
             operator_group.permissions.add(28)
             operator_group.permissions.add(29)
             operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
 
         if taxi_driver_group_created:
             taxi_driver_group.permissions.add(27)
             taxi_driver_group.permissions.add(28)
             taxi_driver_group.permissions.add(29)
+            taxi_driver_group.permissions.add(33)
+            taxi_driver_group.permissions.add(34)
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
@@ -553,6 +592,10 @@ def completed_orders_view(request):
             admin_group.permissions.add(30)
             admin_group.permissions.add(31)
             admin_group.permissions.add(32)
+            admin_group.permissions.add(33)
+            admin_group.permissions.add(34)
+            admin_group.permissions.add(35)
+            admin_group.permissions.add(36)
 
         if operator_group_created:
             operator_group.permissions.add(25)
@@ -561,6 +604,7 @@ def completed_orders_view(request):
             operator_group.permissions.add(28)
             operator_group.permissions.add(29)
             operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
 
         if spectator_group_created:
             spectator_group.permissions.add(32)
