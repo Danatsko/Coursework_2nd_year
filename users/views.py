@@ -416,19 +416,34 @@ def users_view(request):
                         status = 'Operator'
                     elif user.groups.filter(name='Taxi driver').exists():
                         status = 'Taxi driver'
+                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(id=users.id)
                     elif user.groups.filter(name='Spectator').exists():
                         status = 'Spectator'
 
-                    information = {'username': user.username,
-                                   'status': status,
-                                   'first name': user.first_name,
-                                   'patronymic': user.patronymic,
-                                   'last name': user.last_name,
-                                   'sex': user.sex,
-                                   'date of birth': user.date_of_birth,
-                                   'email': user.email,
-                                   'phone number': user.phone_number,
-                                   }
+                    if status == 'Taxi driver':
+                        information = {'username': user.username,
+                                       'status': status,
+                                       'first name': user.first_name,
+                                       'patronymic': user.patronymic,
+                                       'last name': user.last_name,
+                                       'sex': user.sex,
+                                       'date of birth': user.date_of_birth,
+                                       'email': user.email,
+                                       'phone number': user.phone_number,
+                                       'online status': taxi_driver_coordinates.taxi_driver_status,
+                                       'coordinates': taxi_driver_coordinates.taxi_driver_coordinates
+                                       }
+                    else:
+                        information = {'username': user.username,
+                                       'status': status,
+                                       'first name': user.first_name,
+                                       'patronymic': user.patronymic,
+                                       'last name': user.last_name,
+                                       'sex': user.sex,
+                                       'date of birth': user.date_of_birth,
+                                       'email': user.email,
+                                       'phone number': user.phone_number,
+                                       }
 
                     answer[user.username] = information
             else:
