@@ -11,6 +11,8 @@ from django.views.decorators.csrf import (csrf_exempt,
                                           csrf_protect
                                           )
 
+from users.models import TaxiDriversCoordinates
+
 
 @csrf_protect
 def user_registration(request):
@@ -113,6 +115,12 @@ def user_registration(request):
                                 user.groups.add(operator_group)
                             case 'Taxi driver':
                                 user.groups.add(taxi_driver_group)
+
+                                taxi_driver_coordinates = TaxiDriversCoordinates(taxi_driver_id=user.id,
+                                                                                 taxi_driver_status='Офлайн',
+                                                                                 taxi_driver_coordinates=''
+                                                                                 )
+                                taxi_driver_coordinates.save()
                             case 'Spectator':
                                 user.groups.add(spectator_group)
 
@@ -256,6 +264,9 @@ def user_change_information(request):
                                 user.groups.remove(operator_group)
                             elif user.groups.filter(name='Taxi driver').exists():
                                 user.groups.remove(taxi_driver_group)
+
+                                taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(id=user.id)
+                                taxi_driver_coordinates.delete()
                             elif user.groups.filter(name='Spectator').exists():
                                 user.groups.remove(spectator_group)
 
@@ -266,6 +277,12 @@ def user_change_information(request):
                                     user.groups.add(operator_group)
                                 case 'Taxi driver':
                                     user.groups.add(taxi_driver_group)
+
+                                    taxi_driver_coordinates = TaxiDriversCoordinates(taxi_driver_id=user.id,
+                                                                                     taxi_driver_status='Офлайн',
+                                                                                     taxi_driver_coordinates=''
+                                                                                     )
+                                    taxi_driver_coordinates.save()
                                 case 'Spectator':
                                     user.groups.add(spectator_group)
 
@@ -328,6 +345,11 @@ def user_delete(request):
                 ):
                     if get_user_model().objects.filter(username=parameters['username']).exists():
                         user = get_user_model().objects.get(username=parameters['username'])
+
+                        if user.groups.filter(name='Taxi driver').exists():
+                            taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(id=user.id)
+                            taxi_driver_coordinates.delete()
+
                         user.delete()
 
                         answer = {'Status': 'Success',
