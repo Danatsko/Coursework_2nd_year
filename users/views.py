@@ -416,7 +416,7 @@ def users_view(request):
                         status = 'Operator'
                     elif user.groups.filter(name='Taxi driver').exists():
                         status = 'Taxi driver'
-                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=users.id)
+                        taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=user.id)
                     elif user.groups.filter(name='Spectator').exists():
                         status = 'Spectator'
 
@@ -510,6 +510,8 @@ def taxi_driver_coordinates_change_information(request):
                         taxi_driver_coordinates.taxi_driver_status = parameters['new online status']
                         taxi_driver_coordinates.taxi_driver_coordinates = parameters['new coordinates']
 
+                        taxi_driver_coordinates.save()
+
                         answer = {'Status': 'Success',
                                   'Message': 'Changed.'
                                   }
@@ -518,6 +520,8 @@ def taxi_driver_coordinates_change_information(request):
 
                         taxi_driver_coordinates.taxi_driver_status = parameters['new online status']
                         taxi_driver_coordinates.taxi_driver_coordinates = parameters['new coordinates']
+
+                        taxi_driver_coordinates.save()
 
                         answer = {'Status': 'Success',
                                   'Message': 'Changed.'
