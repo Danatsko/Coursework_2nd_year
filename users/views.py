@@ -385,6 +385,7 @@ def user_delete(request):
 def users_view(request):
     if request.user.is_authenticated:
         admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
 
         if admin_group_created:
             admin_group.permissions.add(21)
@@ -404,7 +405,19 @@ def users_view(request):
             admin_group.permissions.add(35)
             admin_group.permissions.add(36)
 
-        if (request.user.groups.filter(name='Admin').exists()):
+        if operator_group_created:
+            operator_group.permissions.add(24)
+            operator_group.permissions.add(25)
+            operator_group.permissions.add(26)
+            operator_group.permissions.add(27)
+            operator_group.permissions.add(28)
+            operator_group.permissions.add(29)
+            operator_group.permissions.add(32)
+            operator_group.permissions.add(36)
+
+        if (request.user.groups.filter(name='Admin').exists() or
+                request.user.groups.filter(name='Operator').exists()
+        ):
             if request.method == 'GET':
                 answer = {}
                 users = get_user_model().objects.all()
