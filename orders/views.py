@@ -38,6 +38,7 @@ def active_orders_add(request):
             admin_group.permissions.add(36)
 
         if operator_group_created:
+            operator_group.permissions.add(24)
             operator_group.permissions.add(25)
             operator_group.permissions.add(26)
             operator_group.permissions.add(27)
@@ -124,6 +125,7 @@ def completed_orders_add(request):
             admin_group.permissions.add(36)
 
         if operator_group_created:
+            operator_group.permissions.add(24)
             operator_group.permissions.add(25)
             operator_group.permissions.add(26)
             operator_group.permissions.add(27)
@@ -211,6 +213,7 @@ def active_orders_change_information(request):
             admin_group.permissions.add(36)
 
         if operator_group_created:
+            operator_group.permissions.add(24)
             operator_group.permissions.add(25)
             operator_group.permissions.add(26)
             operator_group.permissions.add(27)
@@ -381,6 +384,7 @@ def active_orders_delete(request):
             admin_group.permissions.add(36)
 
         if operator_group_created:
+            operator_group.permissions.add(24)
             operator_group.permissions.add(25)
             operator_group.permissions.add(26)
             operator_group.permissions.add(27)
@@ -524,6 +528,7 @@ def active_orders_view(request):
             admin_group.permissions.add(36)
 
         if operator_group_created:
+            operator_group.permissions.add(24)
             operator_group.permissions.add(25)
             operator_group.permissions.add(26)
             operator_group.permissions.add(27)
@@ -598,6 +603,7 @@ def completed_orders_view(request):
             admin_group.permissions.add(36)
 
         if operator_group_created:
+            operator_group.permissions.add(24)
             operator_group.permissions.add(25)
             operator_group.permissions.add(26)
             operator_group.permissions.add(27)
