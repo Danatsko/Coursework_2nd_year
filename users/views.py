@@ -126,27 +126,27 @@ def user_registration(request):
                                 user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Created.'
+                                  'Message': 'Зареєстровано.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'User exists.'
+                                  'Message': 'Користувач існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -289,27 +289,27 @@ def user_change_information(request):
                                     user.groups.add(spectator_group)
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Changed.'
+                                  'Message': 'Змінено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'User does not exist.'
+                                  'Message': 'Користувача не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -355,27 +355,27 @@ def user_delete(request):
                         user.delete()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Deleted.'
+                                  'Message': 'Видалено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'User does not exist.'
+                                  'Message': 'Користувача не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -463,15 +463,15 @@ def users_view(request):
                     answer[user.username] = information
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -528,7 +528,7 @@ def taxi_driver_coordinates_change_information(request):
                         taxi_driver_coordinates.save()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Changed.'
+                                  'Message': 'Змінено.'
                                   }
                     elif TaxiDriversCoordinates.objects.filter(taxi_driver_id=parameters['id']).exists():
                         taxi_driver_coordinates = TaxiDriversCoordinates.objects.get(taxi_driver_id=parameters['id'])
@@ -539,27 +539,27 @@ def taxi_driver_coordinates_change_information(request):
                         taxi_driver_coordinates.save()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Changed.'
+                                  'Message': 'Змінено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'User does not exist.'
+                                  'Message': 'Користувача не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -596,28 +596,28 @@ def user_login(request):
                             user_group = 'Spectator'
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Login.',
+                                  'Message': 'Автентифіковано.',
                                   'User group': user_group
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'Wrong password.'
+                                  'Message': 'Неправильний пароль.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'User does not exist.'
+                              'Message': 'Користувача не існує.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong parameters.'
+                          'Message': 'Неправильні параметри.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'Wrong method.'
+                      'Message': 'Неправильний метод.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Authenticated.'
+                  'Message': 'Вже автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -630,15 +630,15 @@ def user_logaut(request):
             logout(request)
 
             answer = {'Status': 'Success',
-                      'Message': 'Logaut.'
+                      'Message': 'Сесію закінчено.'
                       }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'Wrong method.'
+                      'Message': 'Неправильний метод.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
