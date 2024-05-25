@@ -164,9 +164,27 @@ def completed_orders_add(request):
                         ('price' in parameters) and
                         (len(parameters) == 6)
                 ):
+                    try:
+                        opening_time = datetime.datetime(*list(map(int, parameters['opening time'].split())))
+                    except:
+                        answer = {'Status': 'Fail',
+                                  'Message': 'Час відкриття завершеного замовлення введено некоректно.'
+                                  }
+
+                        return JsonResponse(answer)
+
+                    try:
+                        closing_time = datetime.datetime(*list(map(int, parameters['closing time'].split())))
+                    except:
+                        answer = {'Status': 'Fail',
+                                  'Message': 'Час закриття завершеного замовлення введено некоректно.'
+                                  }
+
+                        return JsonResponse(answer)
+
                     order = CompletedOrders(taxi_driver=parameters['taxi driver'],
-                                            opening_time=datetime.datetime(*list(map(int, parameters['opening time'].split()))),
-                                            closing_time=datetime.datetime(*list(map(int, parameters['closing time'].split()))),
+                                            opening_time=opening_time,
+                                            closing_time=closing_time,
                                             starting_address=parameters['starting address'],
                                             final_address=parameters['final address'],
                                             price=float(parameters['price'])
