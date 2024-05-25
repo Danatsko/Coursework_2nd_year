@@ -244,7 +244,14 @@ def active_orders_change_information(request):
                         order = ActiveOrders.objects.get(id=parameters['id'])
 
                         if parameters['new opening time']:
-                            order.opening_time = datetime.datetime(*list(map(int, parameters['new opening time'].split())))
+                            try:
+                                order.opening_time = datetime.datetime(*list(map(int, parameters['new opening time'].split())))
+                            except:
+                                answer = {'Status': 'Fail',
+                                          'Message': 'Час відкриття активного замовлення введено некоректно.'
+                                          }
+
+                                return JsonResponse(answer)
                         if parameters['new starting address']:
                             new_starting_address_data = nominatim.geocode(parameters['new starting address']).raw
 
