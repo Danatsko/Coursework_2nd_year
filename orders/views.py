@@ -352,9 +352,23 @@ def completed_orders_change_information(request):
                         if parameters['new taxi driver']:
                             order.taxi_driver = parameters['new taxi driver']
                         if parameters['new opening time']:
-                            order.opening_time = datetime.datetime(*list(map(int, parameters['new opening time'].split())))
+                            try:
+                                order.opening_time = datetime.datetime(*list(map(int, parameters['new opening time'].split())))
+                            except:
+                                answer = {'Status': 'Fail',
+                                          'Message': 'Час відкриття завершеного замовлення введено некоректно.'
+                                          }
+
+                                return JsonResponse(answer)
                         if parameters['new closing time']:
-                            order.closing_time = datetime.datetime(*list(map(int, parameters['new closing time'].split())))
+                            try:
+                                order.closing_time = datetime.datetime(*list(map(int, parameters['new closing time'].split())))
+                            except:
+                                answer = {'Status': 'Fail',
+                                          'Message': 'Час закриття завершеного замовлення введено некоректно.'
+                                          }
+
+                                return JsonResponse(answer)
                         if parameters['new starting address']:
                             order.starting_address = parameters['new starting address']
                         if parameters['new final address']:
