@@ -68,12 +68,20 @@ def active_orders_add(request):
                     else:
                         final_address_coordinates = ''
 
-                    order = ActiveOrders(opening_time=datetime.datetime(*list(map(int, parameters['opening time'].split()))),
-                                         starting_address=parameters['starting address'],
-                                         starting_address_coordinates=starting_address_coordinates,
-                                         final_address=parameters['final address'],
-                                         final_address_coordinates=final_address_coordinates
-                                         )
+                    try:
+                        order = ActiveOrders(opening_time=datetime.datetime(*list(map(int, parameters['opening time'].split()))),
+                                             starting_address=parameters['starting address'],
+                                             starting_address_coordinates=starting_address_coordinates,
+                                             final_address=parameters['final address'],
+                                             final_address_coordinates=final_address_coordinates
+                                             )
+                    except:
+                        answer = {'Status': 'Fail',
+                                  'Message': 'Час відкриття активного замовлення введено некоректно.'
+                                  }
+
+                        return JsonResponse(answer)
+
                     order.save()
 
                     answer = {'Status': 'Success',
