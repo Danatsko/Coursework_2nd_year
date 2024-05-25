@@ -54,15 +54,24 @@ def user_registration(request):
                         (len(parameters) == 10)
                 ):
                     if get_user_model().objects.filter(username=parameters['username']).exists() == False:
-                        user = get_user_model().objects.create_user(username=parameters['username'],
-                                                                    first_name=parameters['first name'],
-                                                                    patronymic=parameters['patronymic'],
-                                                                    last_name=parameters['last name'],
-                                                                    sex=parameters['sex'],
-                                                                    date_of_birth=datetime.date(*list(map(int, parameters['date of birth'].split()))),
-                                                                    email=parameters['email'],
-                                                                    phone_number=parameters['phone number']
-                                                                    )
+                        try:
+                            user = get_user_model().objects.create_user(username=parameters['username'],
+                                                                        first_name=parameters['first name'],
+                                                                        patronymic=parameters['patronymic'],
+                                                                        last_name=parameters['last name'],
+                                                                        sex=parameters['sex'],
+                                                                        date_of_birth=datetime.date(*list(map(int,parameters['date of birth'].split()))),
+                                                                        email=parameters['email'],
+                                                                        phone_number=parameters['phone number']
+                                                                        )
+                        except:
+                            answer = {'Status': 'Fail',
+                                      'Message': 'День народження введено некоректно.'
+                                      }
+
+                            return JsonResponse(answer)
+
+
                         user.set_password(raw_password=parameters['password'])
                         user.save()
 
