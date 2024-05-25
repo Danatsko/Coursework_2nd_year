@@ -196,7 +196,14 @@ def user_change_information(request):
                         user = get_user_model().objects.get(username=parameters['username'])
 
                         if parameters['new username']:
-                            user.username = parameters['new username']
+                            if get_user_model().objects.filter(username=parameters['new username']).exists():
+                                answer = {'Status': 'Fail',
+                                          'Message': 'Користувач з таким нікнеймом існує.'
+                                          }
+
+                                return JsonResponse(answer)
+                            else:
+                                user.username = parameters['new username']
                         if parameters['new first name']:
                             user.first_name = parameters['new first name']
                         if parameters['new patronymic']:
@@ -206,7 +213,14 @@ def user_change_information(request):
                         if parameters['new sex']:
                             user.sex = parameters['new sex']
                         if parameters['new date of birth']:
-                            user.date_of_birth = datetime.date(*list(map(int, parameters['new date of birth'].split())))
+                            try:
+                                user.date_of_birth = datetime.date(*list(map(int, parameters['new date of birth'].split())))
+                            except:
+                                answer = {'Status': 'Fail',
+                                          'Message': 'День народження введено некоректно.'
+                                          }
+
+                                return JsonResponse(answer)
                         if parameters['new email']:
                             user.email = parameters['new email']
                         if parameters['new phone number']:
