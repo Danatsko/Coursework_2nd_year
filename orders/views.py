@@ -77,23 +77,23 @@ def active_orders_add(request):
                     order.save()
 
                     answer = {'Status': 'Success',
-                              'Message': 'Created.'
+                              'Message': 'Додано.'
                               }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -166,23 +166,23 @@ def completed_orders_add(request):
                     order.save()
 
                     answer = {'Status': 'Success',
-                              'Message': 'Created.'
+                              'Message': 'Додано.'
                               }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -251,27 +251,27 @@ def active_orders_change_information(request):
                         order.save()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Changed.'
+                                  'Message': 'Змінено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'Active order does not exist.'
+                                  'Message': 'Активного замовлення не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -332,27 +332,27 @@ def completed_orders_change_information(request):
                         order.save()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Changed.'
+                                  'Message': 'Змінено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'Completed order does not exist.'
+                                  'Message': 'Завершеного замовлення не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -415,27 +415,27 @@ def active_orders_delete(request):
                         order.delete()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Deleted.'
+                                  'Message': 'Видалено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'Active order does not exist.'
+                                  'Message': 'Активного замовлення не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -476,27 +476,27 @@ def completed_orders_delete(request):
                         order.delete()
 
                         answer = {'Status': 'Success',
-                                  'Message': 'Deleted.'
+                                  'Message': 'Видалено.'
                                   }
                     else:
                         answer = {'Status': 'Fail',
-                                  'Message': 'Completed order does not exist.'
+                                  'Message': 'Завершеного замовлення не існує.'
                                   }
                 else:
                     answer = {'Status': 'Fail',
-                              'Message': 'Wrong parameters.'
+                              'Message': 'Неправильні параметри.'
                               }
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -563,15 +563,15 @@ def active_orders_view(request):
                     answer[order.id] = information
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
@@ -635,15 +635,15 @@ def completed_orders_view(request):
                     answer[order.id] = information
             else:
                 answer = {'Status': 'Fail',
-                          'Message': 'Wrong method.'
+                          'Message': 'Неправильний метод.'
                           }
         else:
             answer = {'Status': 'Fail',
-                      'Message': 'No permission.'
+                      'Message': 'Немає дозволу.'
                       }
     else:
         answer = {'Status': 'Fail',
-                  'Message': 'Not authenticated.'
+                  'Message': 'Не автентифіковано.'
                   }
 
     return JsonResponse(answer)
