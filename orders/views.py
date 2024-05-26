@@ -13,39 +13,65 @@ from orders.models import (ActiveOrders,
 nominatim = Nominatim(user_agent='Program')
 
 
+def admin_group_add_permissions():
+    admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
+
+    if admin_group_created:
+        admin_group.permissions.add(21)
+        admin_group.permissions.add(22)
+        admin_group.permissions.add(23)
+        admin_group.permissions.add(24)
+        admin_group.permissions.add(25)
+        admin_group.permissions.add(26)
+        admin_group.permissions.add(27)
+        admin_group.permissions.add(28)
+        admin_group.permissions.add(29)
+        admin_group.permissions.add(30)
+        admin_group.permissions.add(31)
+        admin_group.permissions.add(32)
+        admin_group.permissions.add(33)
+        admin_group.permissions.add(34)
+        admin_group.permissions.add(35)
+        admin_group.permissions.add(36)
+
+
+def operator_group_add_permissions():
+    operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
+
+    if operator_group_created:
+        operator_group.permissions.add(24)
+        operator_group.permissions.add(25)
+        operator_group.permissions.add(26)
+        operator_group.permissions.add(27)
+        operator_group.permissions.add(28)
+        operator_group.permissions.add(29)
+        operator_group.permissions.add(32)
+        operator_group.permissions.add(36)
+
+
+def taxi_driver_group_add_permissions():
+    taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
+
+    if taxi_driver_group_created:
+        taxi_driver_group.permissions.add(27)
+        taxi_driver_group.permissions.add(28)
+        taxi_driver_group.permissions.add(29)
+        taxi_driver_group.permissions.add(33)
+        taxi_driver_group.permissions.add(34)
+
+
+def spectator_group_add_permissions():
+    spectator_group, spectator_group_created = Group.objects.get_or_create(name='Spectator')
+
+    if spectator_group_created:
+        spectator_group.permissions.add(32)
+
+
 @csrf_protect
 def active_orders_add(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
-
-        if operator_group_created:
-            operator_group.permissions.add(24)
-            operator_group.permissions.add(25)
-            operator_group.permissions.add(26)
-            operator_group.permissions.add(27)
-            operator_group.permissions.add(28)
-            operator_group.permissions.add(29)
-            operator_group.permissions.add(32)
-            operator_group.permissions.add(36)
+        admin_group_add_permissions()
+        operator_group_add_permissions()
 
         if request.user.groups.filter(name='Admin').exists() or request.user.groups.filter(name='Operator').exists():
             if request.method == 'POST':
@@ -110,44 +136,9 @@ def active_orders_add(request):
 @csrf_protect
 def completed_orders_add(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
-        taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
-
-        if operator_group_created:
-            operator_group.permissions.add(24)
-            operator_group.permissions.add(25)
-            operator_group.permissions.add(26)
-            operator_group.permissions.add(27)
-            operator_group.permissions.add(28)
-            operator_group.permissions.add(29)
-            operator_group.permissions.add(32)
-            operator_group.permissions.add(36)
-
-        if taxi_driver_group_created:
-            taxi_driver_group.permissions.add(27)
-            taxi_driver_group.permissions.add(28)
-            taxi_driver_group.permissions.add(29)
-            taxi_driver_group.permissions.add(33)
-            taxi_driver_group.permissions.add(34)
+        admin_group_add_permissions()
+        operator_group_add_permissions()
+        taxi_driver_group_add_permissions()
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
@@ -217,36 +208,8 @@ def completed_orders_add(request):
 @csrf_protect
 def active_orders_change_information(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
-
-        if operator_group_created:
-            operator_group.permissions.add(24)
-            operator_group.permissions.add(25)
-            operator_group.permissions.add(26)
-            operator_group.permissions.add(27)
-            operator_group.permissions.add(28)
-            operator_group.permissions.add(29)
-            operator_group.permissions.add(32)
-            operator_group.permissions.add(36)
+        admin_group_add_permissions()
+        operator_group_add_permissions()
 
         if request.user.groups.filter(name='Admin').exists() or request.user.groups.filter(name='Operator').exists():
             if request.method == 'POST':
@@ -313,25 +276,7 @@ def active_orders_change_information(request):
 @csrf_protect
 def completed_orders_change_information(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
+        admin_group_add_permissions()
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
@@ -408,44 +353,9 @@ def completed_orders_change_information(request):
 @csrf_protect
 def active_orders_delete(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
-        taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
-
-        if operator_group_created:
-            operator_group.permissions.add(24)
-            operator_group.permissions.add(25)
-            operator_group.permissions.add(26)
-            operator_group.permissions.add(27)
-            operator_group.permissions.add(28)
-            operator_group.permissions.add(29)
-            operator_group.permissions.add(32)
-            operator_group.permissions.add(36)
-
-        if taxi_driver_group_created:
-            taxi_driver_group.permissions.add(27)
-            taxi_driver_group.permissions.add(28)
-            taxi_driver_group.permissions.add(29)
-            taxi_driver_group.permissions.add(33)
-            taxi_driver_group.permissions.add(34)
+        admin_group_add_permissions()
+        operator_group_add_permissions()
+        taxi_driver_group_add_permissions()
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
@@ -491,25 +401,7 @@ def active_orders_delete(request):
 @csrf_protect
 def completed_orders_delete(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
+        admin_group_add_permissions()
 
         if request.user.groups.filter(name='Admin').exists():
             if request.method == 'POST':
@@ -552,44 +444,9 @@ def completed_orders_delete(request):
 @csrf_protect
 def active_orders_view(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
-        taxi_driver_group, taxi_driver_group_created = Group.objects.get_or_create(name='Taxi driver')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
-
-        if operator_group_created:
-            operator_group.permissions.add(24)
-            operator_group.permissions.add(25)
-            operator_group.permissions.add(26)
-            operator_group.permissions.add(27)
-            operator_group.permissions.add(28)
-            operator_group.permissions.add(29)
-            operator_group.permissions.add(32)
-            operator_group.permissions.add(36)
-
-        if taxi_driver_group_created:
-            taxi_driver_group.permissions.add(27)
-            taxi_driver_group.permissions.add(28)
-            taxi_driver_group.permissions.add(29)
-            taxi_driver_group.permissions.add(33)
-            taxi_driver_group.permissions.add(34)
+        admin_group_add_permissions()
+        operator_group_add_permissions()
+        taxi_driver_group_add_permissions()
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
@@ -627,40 +484,9 @@ def active_orders_view(request):
 @csrf_protect
 def completed_orders_view(request):
     if request.user.is_authenticated:
-        admin_group, admin_group_created = Group.objects.get_or_create(name='Admin')
-        operator_group, operator_group_created = Group.objects.get_or_create(name='Operator')
-        spectator_group, spectator_group_created = Group.objects.get_or_create(name='Spectator')
-
-        if admin_group_created:
-            admin_group.permissions.add(21)
-            admin_group.permissions.add(22)
-            admin_group.permissions.add(23)
-            admin_group.permissions.add(24)
-            admin_group.permissions.add(25)
-            admin_group.permissions.add(26)
-            admin_group.permissions.add(27)
-            admin_group.permissions.add(28)
-            admin_group.permissions.add(29)
-            admin_group.permissions.add(30)
-            admin_group.permissions.add(31)
-            admin_group.permissions.add(32)
-            admin_group.permissions.add(33)
-            admin_group.permissions.add(34)
-            admin_group.permissions.add(35)
-            admin_group.permissions.add(36)
-
-        if operator_group_created:
-            operator_group.permissions.add(24)
-            operator_group.permissions.add(25)
-            operator_group.permissions.add(26)
-            operator_group.permissions.add(27)
-            operator_group.permissions.add(28)
-            operator_group.permissions.add(29)
-            operator_group.permissions.add(32)
-            operator_group.permissions.add(36)
-
-        if spectator_group_created:
-            spectator_group.permissions.add(32)
+        admin_group_add_permissions()
+        operator_group_add_permissions()
+        spectator_group_add_permissions()
 
         if (request.user.groups.filter(name='Admin').exists() or
                 request.user.groups.filter(name='Operator').exists() or
