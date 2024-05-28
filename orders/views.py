@@ -502,7 +502,7 @@ def completed_orders_view(request):
                                    'closing time': order.closing_time,
                                    'starting address': order.starting_address,
                                    'final address': order.final_address,
-                                   'price': order.price
+                                   'price': str(order.price)
                                    }
 
                     answer[order.id] = information
